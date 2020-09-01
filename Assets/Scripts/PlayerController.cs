@@ -1,29 +1,31 @@
 ﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
-    [Tooltip("Meters Per Second")] [SerializeField] float speed = 15f;
+    [Header("General")]
+    [Tooltip("Meters Per Second")] [SerializeField] float controlSpeed = 15f;
     [Tooltip("Meters")] [SerializeField] float xRange = 8f;
     [Tooltip("Meters")] [SerializeField] float yRange = 7f;
 
+    [Header("Screen-position Parameters")]
     [SerializeField] float positionPitchFactor = -3f;
-    [SerializeField] float controlPitchFactor = -10f;
-    [SerializeField] float positionYawFactor = 3f;
+    [SerializeField] float positionYawFactor = 4f;
+
+    [Header("Control-throw Parameters")]
     [SerializeField] float controlRollFactor = -10f;
+    [SerializeField] float controlPitchFactor = -10f;
 
     float xThrow, yThrow;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    bool controlEnabled = true;
 
     // Update is called once per frame
     void Update()
     {
-        ProcessTranslation();
-        ProcessRotation();
+        if (controlEnabled)
+        {
+            ProcessTranslation();
+            ProcessRotation();
+        }
     }
 
     private void ProcessTranslation()
@@ -31,8 +33,8 @@ public class Player : MonoBehaviour
         xThrow = Input.GetAxis("Horizontal");
         yThrow = Input.GetAxis("Vertical");
 
-        float xOffset = xThrow * speed * Time.deltaTime;
-        float yOffset = yThrow * speed * Time.deltaTime;
+        float xOffset = xThrow * controlSpeed * Time.deltaTime;
+        float yOffset = yThrow * controlSpeed * Time.deltaTime;
 
         float rawXPos = transform.localPosition.x + xOffset;
         float rawYPos = transform.localPosition.y + yOffset;
@@ -54,5 +56,13 @@ public class Player : MonoBehaviour
         float roll = xThrow * controlRollFactor;
         
         transform.localRotation = Quaternion.Euler(pitch, yaw, roll);
+    }
+
+    /// <summary>
+    /// Called by string reference
+    /// </summary>
+    private void HandleDeathSequence()
+    {
+        controlEnabled = false;
     }
 }
