@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4029445680763570}
   - component: {fileID: 33959892086348258}
   - component: {fileID: 23197084716274270}
-  - component: {fileID: 6322264668808055208}
+  - component: {fileID: 509312451}
   m_Layer: 0
   m_Name: BioTorpedo
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1906374043378120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -21.426918, y: -21.426918, z: -21.426916}
+  m_LocalScale: {x: -21.426918, y: -21.426918, z: -21.426918}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -80,16 +80,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &6322264668808055208
-BoxCollider:
+--- !u!114 &509312451
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906374043378120}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.18562551, y: 0.1856255, z: 0.43652338}
-  m_Center: {x: 0.0000019093418, y: 2.4915106e-10, z: -0.06688193}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962bf0b6135ee904a81c89b100b9379c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathExplosion: {fileID: 100008, guid: 1dbc518224e49f34095aab42fe05751a, type: 3}
+  parent: {fileID: 0}
+  scorePerHit: 5

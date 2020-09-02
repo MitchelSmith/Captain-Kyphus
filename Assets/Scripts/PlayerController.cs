@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Meters Per Second")] [SerializeField] float controlSpeed = 15f;
     [Tooltip("Meters")] [SerializeField] float xRange = 8f;
     [Tooltip("Meters")] [SerializeField] float yRange = 7f;
+    [SerializeField] GameObject[] guns;
 
     [Header("Screen-position Parameters")]
     [SerializeField] float positionPitchFactor = -3f;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         {
             ProcessTranslation();
             ProcessRotation();
+            ProcessFiring();
         }
     }
 
@@ -64,5 +66,35 @@ public class PlayerController : MonoBehaviour
     private void HandleDeathSequence()
     {
         controlEnabled = false;
+    }
+
+    private void ProcessFiring()
+    {
+        if (Input.GetButton("Fire"))
+        {
+            ActivateGuns();
+        }
+        else
+        {
+            DeactivateGuns();
+        }
+    }
+
+    private void ActivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            var emissionModule = gun.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = true;
+        }
+    }
+
+    private void DeactivateGuns()
+    {
+        foreach (GameObject gun in guns)
+        {
+            var emissionModule = gun.GetComponent<ParticleSystem>().emission;
+            emissionModule.enabled = false;
+        }
     }
 }
